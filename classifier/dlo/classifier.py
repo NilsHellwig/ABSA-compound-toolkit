@@ -282,6 +282,11 @@ def get_para_tasd_targets_test(sents, labels):
         for triplet in label:
             at, ac, sp = triplet
 
+            if language == 'german':
+                man_ot = sentword2opinion_german[sp]  # 'POS' -> 'gut'
+            else:
+                man_ot = sentword2opinion[sp]  # 'POS' -> 'good'
+
             if at == 'NULL':  # Für implizite Aspekte
                 if language == 'german':
                     at = 'es'
@@ -289,7 +294,7 @@ def get_para_tasd_targets_test(sents, labels):
                     at = 'it'
 
             # Triplet ohne OT (Opinion Term)
-            triplet_list = [f"[AT] {at}", f"[AC] {ac}", f"[SP] {sp}"]
+            triplet_list = [f"[AT] {at}", f"[AC] {ac}", f"[SP] {man_ot}"]
             one_triplet_sentence = " ".join(triplet_list)
             all_triplet_sentences.append(one_triplet_sentence)
 
